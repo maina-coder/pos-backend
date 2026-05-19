@@ -1,0 +1,11 @@
+# Ignore the Python virtual environment
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Ignore the local database containing your test sales and admin password
+db.sqlite3
+
+# Ignore VS Code system settings
+.vscode/
