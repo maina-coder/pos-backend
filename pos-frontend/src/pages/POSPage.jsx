@@ -68,7 +68,7 @@ export default function POSPage() {
 
   async function createSale(payload) {
     const savedToken = localStorage.getItem("pos_token");
-    const res = await fetch("http://127.0.0.1:8000/api/sales/", {
+    const res = await fetch("https://deveronig-backend.onrender.com/api/sales/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

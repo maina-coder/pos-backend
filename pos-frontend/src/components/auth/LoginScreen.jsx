@@ -41,7 +41,7 @@ export default function LoginScreen({ login }) {
         ? API_BASE_URL 
         : `${API_BASE_URL}/api`;
 
-    const res = await fetch("http://127.0.0.1:8000/api/auth/login/", {
+    const res = await fetch("https://deveronig-backend.onrender.com/api/auth/login/", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
