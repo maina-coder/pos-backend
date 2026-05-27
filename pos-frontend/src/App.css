@@ -1,0 +1,526 @@
+/* =============================================================================
+   Deveronig Digital Electronics Ltd — Modern Industrial POS Engine Style Sheets
+   Location: src/app.css
+   
+   DESIGN PHILOSOPHY:
+   Sleek command-center aesthetic optimized for rapid-fire cashier data entry. 
+   High contrast, distinctive structural layouts, satisfying hover responses, 
+   and clean typography tracking layouts that look highly professional.
+============================================================================= */
+
+/* =============================================================================
+   1. VARIABLES, FONTS, AND DESIGN ENGINE RESET
+============================================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght=500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --navy-dark:      #0b1329;  /* Deep tech canvas backdrop */
+  --panel-navy:     #1c2541;  /* High contrast container fields */
+  --accent-blue:    #3a86ff;  /* Dynamic primary key color */
+  --blue-hover:     #2563eb;  /* Focused interaction states */
+  --blue-light:     #f0fdf4;  /* Accent selection tracking background */
+  --success-green:  #10b981;  /* Balanced transaction change color */
+  --alert-red:      #ef4444;  /* Destructive action identifiers */
+  --warning-amber:  #f59e0b;  /* Discrepancy notifications */
+  
+  --bg-workspace:   #f8fafc;  /* Clean peripheral background */
+  --card-white:     #ffffff;  /* Operational board frames */
+  --border-slate:   #e2e8f0;  /* Micro dividers */
+  
+  --text-main:      #0f172a;  /* Solid reading parameters */
+  --text-muted:     #475569;  /* Explanatory subtitle markers */
+  --text-light:     #94a3b8;  /* Placeholder default indicators */
+}
+
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+html, body, #root { 
+  height: 100%; 
+  background-color: var(--bg-workspace);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea { 
+  font-family: 'Inter', sans-serif; 
+}
+
+/* =============================================================================
+   2. LOGIN GATEWAY (Sleek Split Panel Matrix)
+============================================================================= */
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.login-brand {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--panel-navy) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-brand::before {
+  content: "";
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(58, 134, 255, 0.08) 0%, transparent 70%);
+  top: -150px; right: -150px;
+}
+
+.brand-icon { 
+  font-size: 64px; 
+  margin-bottom: 24px; 
+  animation: pulse 3s infinite ease-in-out;
+}
+
+.brand-name { 
+  font-family: 'Rajdhani', sans-serif; 
+  font-size: 32px; 
+  font-weight: 700; 
+  color: #ffffff; 
+  text-align: center; 
+  letter-spacing: 1px;
+}
+
+.brand-divider { 
+  width: 60px; 
+  height: 4px; 
+  background: var(--accent-blue); 
+  border-radius: 2px; 
+  margin: 20px auto; 
+}
+
+.brand-tagline { 
+  font-size: 12px; 
+  color: #93c5fd; 
+  text-transform: uppercase; 
+  letter-spacing: 3px; 
+  font-weight: 600;
+}
+
+.brand-features { 
+  list-style: none; 
+  margin-top: 40px; 
+}
+
+.brand-features li { 
+  color: #cbd5e1; 
+  font-size: 14px; 
+  padding: 8px 0; 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+}
+
+.brand-features li::before { 
+  content: "✓"; 
+  color: var(--accent-blue); 
+  font-weight: 700; 
+}
+
+.login-form-panel {
+  background: var(--card-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+}
+
+.login-card { width: 100%; max-width: 380px; }
+.login-card-title { font-family: 'Rajdhani', sans-serif; font-size: 32px; font-weight: 700; color: var(--navy-dark); margin-bottom: 6px; }
+.login-card-sub { color: var(--text-muted); font-size: 14px; margin-bottom: 32px; }
+
+.login-form { display: flex; flex-direction: column; gap: 18px; }
+.field-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 13px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+.form-input {
+  width: 100%;
+  border: 1.5px solid var(--border-slate);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--text-main);
+  background: #f8fafc;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-input:focus {
+  border-color: var(--accent-blue);
+  background: var(--card-white);
+  box-shadow: 0 0 0 4px rgba(58, 134, 255, 0.12);
+}
+
+.input-wrapper { position: relative; display: flex; align-items: center; }
+.password-toggle { position: absolute; right: 14px; background: none; border: none; cursor: pointer; color: var(--text-light); display: flex; align-items: center; }
+.password-toggle:hover { color: var(--accent-blue); }
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%233a86ff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  cursor: pointer;
+}
+
+/* =============================================================================
+   3. PROFESSIONAL SYSTEM ACCESS MODULES & BUTTONS
+============================================================================= */
+.btn-primary {
+  background: linear-gradient(90deg, var(--panel-navy), var(--accent-blue));
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(58, 134, 255, 0.2);
+}
+
+.btn-primary:hover:not(:disabled) { 
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(58, 134, 255, 0.3);
+}
+
+.btn-primary:disabled { background: var(--text-light); cursor: not-allowed; transform: none; box-shadow: none; }
+
+.alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; border-radius: 8px; padding: 12px; font-weight: 500; text-align: center; }
+
+/* =============================================================================
+   4. TOP EXECUTIVE NAVIGATION CONTROL BAR
+============================================================================= */
+.topbar {
+  background: linear-gradient(90deg, var(--navy-dark), var(--panel-navy));
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 64px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  z-index: 100;
+}
+
+.topbar-name { font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+.topbar-name span { display: block; font-size: 10px; font-weight: 500; color: var(--accent-blue); letter-spacing: 2px; font-family: 'Inter', sans-serif; }
+
+.topbar-center { display: flex; gap: 40px; }
+.topbar-stat { display: flex; flex-direction: column; font-size: 10px; color: #94a3b8; letter-spacing: 1px; }
+.topbar-stat strong { color: #ffffff; font-size: 18px; font-family: 'Rajdhani', sans-serif; font-weight: 700; }
+
+.topbar-user-role { background: rgba(58, 134, 255, 0.15); color: var(--accent-blue); border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+
+.topbar-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #fff; border-radius: 6px; padding: 8px 16px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.topbar-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.25); }
+.topbar-btn--danger { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.25); color: #fca5a5; }
+.topbar-btn--danger:hover { background: rgba(239,68,68,0.3); color: #ffffff; }
+
+/* =============================================================================
+   5. WORKSPACE CONSOLE GRID INTERFACE SYSTEM
+============================================================================= */
+.pos-app { display: flex; flex-direction: column; height: 100vh; }
+.pos-main { display: flex; flex: 1; overflow: hidden; background-color: var(--bg-workspace); }
+
+.pos-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.pos-card {
+  background: var(--card-white);
+  border-radius: 12px;
+  border: 1px solid var(--border-slate);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.01);
+  transition: box-shadow 0.3s ease;
+}
+.pos-card:hover { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.04); }
+
+.pos-card-header {
+  background: #fafafa;
+  border-bottom: 1px solid var(--border-slate);
+  padding: 14px 24px;
+}
+
+.pos-card-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy-dark);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pos-card-body { padding: 24px; }
+
+/* =============================================================================
+   6. REALTIME ITEM GRID AND STEPPER CONTROLS
+============================================================================= */
+.item-entry-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1fr auto;
+  gap: 16px;
+  align-items: end;
+}
+
+.qty-stepper { 
+  display: flex; 
+  align-items: center; 
+  border: 1.5px solid var(--border-slate); 
+  border-radius: 8px; 
+  overflow: hidden; 
+  height: 44px; 
+  background: #f8fafc; 
+  transition: border-color 0.2s; 
+}
+.qty-stepper:focus-within { border-color: var(--accent-blue); background: #fff; }
+.qty-stepper-btn { background: none; border: none; width: 40px; height: 100%; font-size: 18px; font-weight: 600; color: var(--accent-blue); cursor: pointer; transition: background 0.15s; }
+.qty-stepper-btn:hover { background: #f1f5f9; }
+.qty-stepper-value { flex: 1; text-align: center; font-size: 15px; font-weight: 700; color: var(--text-main); }
+
+.btn-add-item {
+  background: linear-gradient(135deg, var(--panel-navy), var(--accent-blue));
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0 24px;
+  height: 44px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 10px rgba(58, 134, 255, 0.15);
+}
+.btn-add-item:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-1px); }
+
+/* =============================================================================
+   7. TRANSACTION LEDGER GRID TABLE STYLING
+============================================================================= */
+.items-table-wrapper { overflow-y: auto; flex: 1; padding: 0; }
+.items-table { width: 100%; border-collapse: collapse; }
+
+.items-table thead th {
+  background: #f8fafc;
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 2px solid var(--border-slate);
+  position: sticky; top: 0;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.items-table tbody tr { border-bottom: 1px solid #f1f5f9; transition: background 0.15s; }
+.items-table tbody tr:hover { background: #f8fafc; }
+.items-table td { padding: 14px 20px; color: var(--text-main); vertical-align: middle; font-size: 14px; }
+
+.td-name { font-weight: 600; color: var(--navy-dark); }
+.td-subtotal { font-weight: 700; color: var(--accent-blue); }
+
+.btn-remove { background: #fee2e2; border: none; color: var(--alert-red); border-radius: 6px; padding: 6px 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.btn-remove:hover { background: var(--alert-red); color: #ffffff; }
+
+.table-empty { text-align: center; padding: 60px 20px; color: var(--text-light); }
+.table-empty-icon { font-size: 48px; margin-bottom: 12px; opacity: 0.4; }
+
+/* =============================================================================
+   8. REALTIME HARDWARE FINANCIAL CHECKOUT SIDEBAR
+============================================================================= */
+.pos-right {
+  width: 360px;
+  background: var(--card-white);
+  border-left: 1px solid var(--border-slate);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.02);
+}
+
+.sidebar-section { padding: 24px; border-bottom: 1px solid #f1f5f9; }
+.sidebar-section-title { font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
+
+.summary-row { display: flex; justify-content: space-between; padding: 6px 0; color: var(--text-muted); font-size: 14px; }
+.summary-row--total { font-size: 26px; font-weight: 800; color: var(--navy-dark); font-family: 'Rajdhani', sans-serif; border-top: 2px dashed var(--border-slate); padding-top: 16px; margin-top: 10px; }
+.summary-row--total span:last-child { color: var(--accent-blue); }
+
+.cash-input-large {
+  border: 2px solid var(--accent-blue);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--navy-dark);
+  outline: none;
+  width: 100%;
+  background: #f8fafc;
+  font-family: 'Rajdhani', sans-serif;
+  transition: all 0.2s;
+  text-align: right;
+}
+.cash-input-large:focus { border-color: var(--navy-dark); box-shadow: 0 0 0 4px rgba(58, 134, 255, 0.12); background: #ffffff; }
+
+.balance-box { border-radius: 8px; padding: 16px; text-align: center; margin-top: 16px; }
+.balance-box--good { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+.balance-box--bad { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+.balance-box-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; opacity: 0.8; margin-bottom: 4px; }
+.balance-box-amount { font-size: 32px; font-weight: 800; font-family: 'Rajdhani', sans-serif; }
+
+.sidebar-actions { padding: 24px; display: flex; flex-direction: column; gap: 12px; margin-top: auto; }
+
+.btn-complete-sale { 
+  background: linear-gradient(135deg, var(--navy-dark), var(--accent-blue)); 
+  color: #fff; 
+  border: none; 
+  border-radius: 10px; 
+  padding: 16px; 
+  font-size: 16px; 
+  font-weight: 700; 
+  cursor: pointer; 
+  transition: all 0.2s; 
+  box-shadow: 0 4px 14px rgba(15, 31, 61, 0.25);
+}
+.btn-complete-sale:hover:not(:disabled) { filter: brightness(1.15); transform: translateY(-1px); }
+.btn-complete-sale:disabled { background: var(--text-light); cursor: not-allowed; transform: none; box-shadow: none; }
+
+.btn-clear-all { background: none; color: var(--alert-red); border: 1px solid #fca5a5; border-radius: 8px; padding: 10px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+.btn-clear-all:hover:not(:disabled) { background: #fee2e2; }
+
+/* =============================================================================
+   9. INTERACTIVE OVERLAY MODALS (Thermal Invoice Voucher Style)
+============================================================================= */
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(11, 19, 41, 0.65);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999; padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.receipt-modal {
+  background: var(--card-white);
+  border-radius: 16px;
+  width: 380px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.receipt-header { background: var(--navy-dark); color: #ffffff; padding: 24px; text-align: center; }
+.receipt-brand-name { font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 6px; }
+.receipt-meta { font-size: 12px; color: #94a3b8; margin: 2px 0; }
+
+.receipt-body { padding: 24px; }
+.receipt-dashes { border: none; border-top: 2px dashed var(--border-slate); margin: 16px 0; }
+
+.receipt-item-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px; }
+.receipt-item-name { font-weight: 600; color: var(--text-main); }
+.receipt-item-detail { font-size: 12px; color: var(--text-muted); }
+.receipt-item-subtotal { font-weight: 700; color: var(--navy-dark); }
+
+.receipt-sum-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 14px; }
+.receipt-sum-row--total { font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 800; color: var(--navy-dark); border-top: 2px solid var(--navy-dark); padding-top: 12px; margin-top: 8px; }
+.receipt-sum-row--change { color: var(--success-green); font-weight: 700; font-size: 16px; }
+
+.receipt-footer { text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 16px; }
+.receipt-footer-brand { font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700; color: var(--navy-dark); margin-top: 4px; }
+
+.receipt-actions { padding: 16px 24px 24px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #f1f5f9; }
+
+.btn-confirm { background: linear-gradient(90deg, var(--panel-navy), var(--accent-blue)); color: #fff; border: none; border-radius: 8px; padding: 12px; font-weight: 700; cursor: pointer; }
+.btn-secondary { background: #f1f5f9; border: none; border-radius: 8px; padding: 10px; font-weight: 600; color: var(--text-muted); cursor: pointer; }
+
+/* 🌀 Micro-Keyframe Pulse Animation */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.95; }
+}
+
+/* =============================================================================
+   10. HARDWARE THERMAL PRINTER EXECUTION MEDIA QUERY OVERWRITES
+============================================================================= */
+@media print {
+  /* 🎯 Force the print engine configuration to accept standard thermal receipt dimensions */
+  @page {
+    size: 80mm auto; /* Automatically defines the width as 80mm thermal paper roll size */
+    margin: 0;       /* Removes native browser padding/headers completely */
+  }
+
+  /* 🎯 THE CRITICAL BUG FIX: Instruct print head to ignore standard display visibility layers... */
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* 🎯 ...and explicitly force the modal wrapper and its content lines to remain visible */
+  .overlay, .overlay * {
+    visibility: visible !important;
+  }
+
+  /* Strip interactive action buttons from hitting the print spooler roll */
+  .receipt-actions, .no-print {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Strip background layouts for a clean physical paper feed roll layout */
+  .overlay {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    background: none !important;
+    backdrop-filter: none !important;
+    display: block !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* 🎯 Format the text container to sit tightly inside the 80mm boundary */
+  .receipt-modal {
+    width: 76mm !important; /* Leave a tiny 4mm safe margin for printer teeth */
+    max-width: 76mm !important;
+    margin: 0 auto !important;
+    padding: 4mm !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Make sure typography doesn't blur or clip on high-density print heads */
+  .receipt-brand-name {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+  
+  .receipt-item-row, .receipt-sum-row {
+    font-size: 12px !important;
+  }
+}
