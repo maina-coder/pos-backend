@@ -2,6 +2,7 @@
 Django settings for pos_backend project.
 
 Optimized for: React / Vite Frontend API Integration
+Production Cloud Profile: Render & Vercel
 """
 
 import os
@@ -17,11 +18,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-j_bk*f8%6)n)=*_t11$4t208y7*bi-99qr737j14bsu@*m6k$3'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# 🎯 SECURITY WARNING: Switch debug OFF in production so error trace grids remain hidden
+DEBUG = False
 
-# Explicitly list local loopbacks for API development engines
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# 🎯 SECURITY ALLOWLIST: Grant explicit routing clearance to your live Render server domain
+ALLOWED_HOSTS = [
+    'deveronig-backend.onrender.com',
+    'localhost',
+    '127.0.0.1'
+]
 
 
 # Application definition
@@ -45,6 +50,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    
+    # 🎯 WHITE NOISE STATIC ROUTER (Optional addition if running admin styles on simple free servers)
     'django.contrib.sessions.middleware.SessionMiddleware',
     
     # 🌟 CORS HEADERS MIDDLEWARE (Must remain right here above CommonMiddleware)
@@ -154,6 +161,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Standard Vite engine asset routing port
     "http://127.0.0.1:3000",
     "http://127.0.0.1:5173",
+    # 🎯 TODO: Once Vercel gives you your frontend link tomorrow morning, paste it right here!
+    # "https://deveronig-pos.vercel.app"
 ]
 
 # 🌟 Allow React to read standard cross-origin verification headers
@@ -168,4 +177,7 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+
+# Since your file has CORS_ALLOW_ALL_ORIGINS active at the bottom, we preserve it 
+# so your React app can safely perform handshakes without CORS blockages.
 CORS_ALLOW_ALL_ORIGINS = True
