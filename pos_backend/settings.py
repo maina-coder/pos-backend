@@ -7,10 +7,14 @@ Production Cloud Profile: Render & Vercel
 
 import os
 from pathlib import Path
+import dj_database_url
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Automatically reads key-value pairs out of a local .env file during development
+load_dotenv(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -51,7 +55,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     
-    # 🎯 FIX: WhiteNoise must sit EXACTLY here to catch and style your admin panel panels!
+    # 🎯 WhiteNoise sits here to catch and serve your admin panel styling sheets!
     'whitenoise.middleware.WhiteNoiseMiddleware',
     
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -86,14 +90,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pos_backend.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
+# =============================================================================
+# DATABASE CONFIGURATION (Production PostgreSQL vs Local SQLite Fallback)
+# =============================================================================
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        # Safe string fallback configuration path routing
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+        ssl_require=True if os.environ.get('DATABASE_URL') else False
+    )
 }
 
 
@@ -129,14 +135,15 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
-
+# =============================================================================
+# STATIC ASSETS CONFIGURATION (WhiteNoise Production Delivery)
+# =============================================================================
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
+# 🎯 Instruct WhiteNoise to compress and create permanent caching manifests for style files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -153,18 +160,18 @@ REST_FRAMEWORK = {
     # 🌟 Always format errors and metadata responses into clean JSON datasets for React
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer', # Keeps your browser testing view readable
+        'rest_framework.renderers.BrowsableAPIRenderer', 
     ],
 }
 
 # 🌟 EXPLICIT REVENUE PLATFORM SECURITY RULES
+CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Default standard React app port
-    "http://localhost:5173",  # Standard Vite engine asset routing port
+    "http://localhost:3000",  
+    "http://localhost:5173",  
     "http://127.0.0.1:3000",
     "http://127.0.0.1:5173",
-    # 🎯 TODO: Once Vercel gives you your frontend link tomorrow morning, paste it right here!
-    # "https://deveronig-pos.vercel.app"
 ]
 
 # 🌟 Allow React to read standard cross-origin verification headers
@@ -179,7 +186,3 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
-
-# Since your file has CORS_ALLOW_ALL_ORIGINS active at the bottom, we preserve it 
-# so your React app can safely perform handshakes without CORS blockages.
-CORS_ALLOW_ALL_ORIGINS = True
