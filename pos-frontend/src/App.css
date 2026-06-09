@@ -11,8 +11,9 @@
 /* =============================================================================
    1. VARIABLES, FONTS, AND DESIGN ENGINE RESET
 ============================================================================= */
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght=500;600;700&family=Inter:wght=400;500;600;700&display=swap');
-
+/* Delete your old @import line and replace it with these two clean separate lines: */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 :root {
   --navy-dark:      #0b1329;  /* Deep tech canvas backdrop */
   --panel-navy:     #1c2541;  /* High contrast container fields */
@@ -412,58 +413,61 @@ button, input, select, textarea {
 .btn-clear-all:hover:not(:disabled) { background: #fee2e2; }
 
 /* =============================================================================
-   9. INTERACTIVE OVERLAY MODALS (Thermal Invoice Voucher Style)
+   9. INTERACTIVE OVERLAY MODALS (Premium Spaced Typography Layouts)
 ============================================================================= */
 .overlay {
   position: fixed; inset: 0;
-  background: rgba(11, 19, 41, 0.65);
+  background: rgba(11, 19, 41, 0.7);
   display: flex; align-items: center; justify-content: center;
   z-index: 9999; padding: 20px;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
 }
 
 .receipt-modal {
   background: var(--card-white);
-  border-radius: 16px;
-  width: 380px;
+  border-radius: 24px;
+  width: 420px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 25px 50px -12px rgba(11, 19, 41, 0.35);
   display: flex;
   flex-direction: column;
 }
 
 /* 🎯 Center-aligned Header Canvas */
 .receipt-header { 
-  background: var(--navy-dark); 
-  color: #ffffff; 
-  padding: 32px 24px; 
+  background: transparent; 
+  color: var(--navy-dark); 
+  padding: 36px 32px 20px 32px; 
   text-align: center; 
 }
 
 .receipt-brand-name { 
-  font-family: 'Rajdhani', sans-serif; 
+  font-family: 'Inter', sans-serif; 
   font-size: 20px; 
-  font-weight: 700; 
+  font-weight: 800; 
   letter-spacing: 0.5px; 
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
+  line-height: 1.4;
 }
 
 .receipt-meta { 
-  font-size: 12px; 
-  color: #94a3b8; 
-  margin: 4px 0; 
+  font-size: 13px; 
+  color: var(--text-muted); 
+  margin: 6px 0; 
+  line-height: 1.6;
 }
 
 .receipt-body { 
-  padding: 32px 24px; 
+  padding: 0 32px 36px 32px; 
 }
 
 /* 🎯 Structural Metadata Lines */
-.receipt-body > p {
+.receipt-body p {
   text-align: center !important; 
-  margin: 6px 0 !important;
-  font-size: 13px !important;
+  margin: 8px 0 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
 }
 
 /* Elegant, spacious dashed dividers */
@@ -477,7 +481,8 @@ button, input, select, textarea {
 .receipt-item-row { 
   display: flex; 
   justify-content: space-between; 
-  padding: 10px 0; 
+  align-items: center;
+  padding: 4px 0; 
   font-size: 14px; 
 }
 
@@ -485,34 +490,36 @@ button, input, select, textarea {
   font-weight: 600; 
   color: var(--text-main); 
   text-align: left;
+  line-height: 1.5;
 }
 
 .receipt-item-detail { 
-  font-size: 12px; 
-  color: var(--text-muted); 
+  font-size: 13px; 
+  color: #64748b; 
   margin-top: 2px;
+  font-weight: 400;
 }
 
 .receipt-item-subtotal { 
   font-weight: 700; 
   color: var(--navy-dark); 
   text-align: right;
-  align-self: center;
 }
 
 .receipt-sum-row { 
   display: flex; 
   justify-content: space-between; 
-  padding: 8px 0; 
+  padding: 6px 0; 
   font-size: 14px; 
+  color: var(--text-muted);
 }
 
 .receipt-sum-row--total { 
-  font-family: 'Rajdhani', sans-serif; 
-  font-size: 24px; 
+  font-family: 'Inter', sans-serif; 
+  font-size: 22px; 
   font-weight: 800; 
   color: var(--navy-dark); 
-  border-top: 2px solid var(--navy-dark); 
+  border-top: 2px dashed var(--navy-dark); 
   padding-top: 16px; 
   margin-top: 12px; 
 }
@@ -520,30 +527,40 @@ button, input, select, textarea {
 .receipt-sum-row--change { 
   color: var(--success-green); 
   font-weight: 700; 
-  font-size: 18px; 
+  font-size: 16px; 
 }
 
 /* 🎯 Center-aligned Footer Canvas */
 .receipt-footer { 
   text-align: center; 
   font-size: 13px; 
-  color: var(--text-muted); 
-  margin-top: 24px; 
+  color: #64748b; 
+  margin-top: 12px; 
+  line-height: 1.6;
 }
 
 .receipt-footer p {
-  margin: 4px 0;
+  margin: 6px 0 !important;
+  text-align: center !important;
 }
 
 .receipt-footer-brand { 
-  font-family: 'Rajdhani', sans-serif; 
+  font-family: 'Inter', sans-serif; 
   font-size: 14px; 
   font-weight: 700; 
   color: var(--navy-dark); 
-  margin-top: 12px; 
+  margin-top: 16px; 
+  letter-spacing: 0.3px;
 }
 
-.receipt-actions { padding: 16px 24px 24px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #f1f5f9; }
+.receipt-actions { 
+  padding: 20px 24px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
+  border-top: 1px solid #e2e8f0; 
+  border-radius: 0 0 24px 24px;
+}
 
 /* =============================================================================
    10. HARDWARE THERMAL PRINTER EXECUTION MEDIA QUERY OVERWRITES
@@ -558,8 +575,8 @@ button, input, select, textarea {
     background: #ffffff !important;
     color: #000000 !important; 
     font-family: "Courier New", Courier, monospace !important; 
-    font-size: 12px !important;
-    line-height: 1.5 !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
     width: 80mm;
     height: auto;
   }
@@ -586,15 +603,19 @@ button, input, select, textarea {
   }
 
   .receipt-modal {
-    width: 72mm !important; 
-    max-width: 72mm !important;
+    width: 74mm !important; 
+    max-width: 74mm !important;
     margin: 0 auto !important;
-    padding: 6mm 0mm 16mm 0mm !important; 
+    padding: 6mm 2mm 12mm 2mm !important; 
     background: #ffffff !important;
     box-shadow: none !important;
     border: none !important;
     border-radius: 0 !important;
     overflow: visible !important;
+    display: flex !important;
+    flex-direction: column !important;
+    float: none !important;
+    align-items: center !important;
   }
 
   .receipt-actions, .no-print, .btn-complete-sale, .btn-clear-all {
@@ -603,89 +624,28 @@ button, input, select, textarea {
     height: 0 !important;
   }
 
-  /* Centered Header Overwrite for Printer */
-  .receipt-header {
-    background: transparent !important; 
-    color: #000000 !important;
-    padding: 0 0 12px 0 !important;
-    text-align: center !important;
+  /* Force the entire container element block to center-align data */
+  .printable-receipt-content {
+    width: 100% !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    float: none;
+    text-align:center !important;
   }
 
-  .receipt-brand-name {
-    font-family: 'Courier New', monospace !important;
-    font-size: 16px !important;
-    font-weight: bold !important;
+  /* Force all nested elements inside the ticket content to snap perfectly to the center axis */
+  .printable-receipt-content div,
+  .printable-receipt-content p,
+  .printable-receipt-content span,
+  .printable-receipt-content strong {
     text-align: center !important;
-    margin-bottom: 6px !important;
-  }
-
-  .receipt-meta {
-    font-size: 11px !important;
-    color: #000000 !important;
-    text-align: center !important;
-    margin: 2px 0 !important;
-  }
-
-  .receipt-body > p {
-    text-align: center !important;
-    margin: 4px 0 !important;
-  }
-
-  /* Left-Right Fail-safe Floats for Clean Grid Lines */
-  .receipt-item-row, 
-  .receipt-sum-row {
+    float: none !important;
     display: block !important;
     width: 100% !important;
-    clear: both !important;
-    padding: 6px 0 !important; 
-  }
-
-  .receipt-item-name,
-  .receipt-sum-row span:first-child,
-  .receipt-sum-row strong:first-child {
-    float: left !important;
-    max-width: 65% !important;
-    text-align: left !important;
-  }
-
-  .receipt-item-subtotal,
-  .receipt-sum-row span:last-child,
-  .receipt-sum-row strong:last-child {
-    float: right !important;
-    text-align: right !important;
-    font-weight: bold !important;
-  }
-
-  .receipt-item-detail {
-    display: block !important;
-    clear: both !important;
-    font-size: 11px !important;
-    padding-left: 4px !important;
-    text-align: left !important;
-  }
-
-  .receipt-sum-row--total {
-    border-top: 1px solid #000000 !important;
-    margin-top: 10px !important;
-    padding-top: 10px !important;
-  }
-
-  .receipt-sum-row--total span {
-    font-size: 15px !important;
-    font-weight: bold !important;
-  }
-
-  /* Centered Footer Overwrite for Printer */
-  .receipt-footer {
-    color: #000000 !important;
-    text-align: center !important;
-    padding-top: 16px !important;
-    font-size: 11px !important;
-    clear: both !important;
-  }
-
-  .receipt-footer p {
-    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   .receipt-dashes {
