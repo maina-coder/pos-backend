@@ -636,6 +636,11 @@ button, input, select, textarea {
   }
 
   /* Force all nested elements inside the ticket content to snap perfectly to the center axis */
+ .printable-receipt-content * {
+    visibility: visible !important;
+    display: block !important;
+  }
+
   .printable-receipt-content div,
   .printable-receipt-content p,
   .printable-receipt-content span,
@@ -647,6 +652,7 @@ button, input, select, textarea {
     margin-left: auto !important;
     margin-right: auto !important;
   }
+}
 
   .receipt-dashes {
     display: block !important;
