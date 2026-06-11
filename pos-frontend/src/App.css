@@ -11,9 +11,9 @@
 /* =============================================================================
    1. VARIABLES, FONTS, AND DESIGN ENGINE RESET
 ============================================================================= */
-/* Delete your old @import line and replace it with these two clean separate lines: */
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
   --navy-dark:      #0b1329;  /* Deep tech canvas backdrop */
   --panel-navy:     #1c2541;  /* High contrast container fields */
@@ -434,7 +434,6 @@ button, input, select, textarea {
   flex-direction: column;
 }
 
-/* 🎯 Center-aligned Header Canvas */
 .receipt-header { 
   background: transparent; 
   color: var(--navy-dark); 
@@ -462,7 +461,6 @@ button, input, select, textarea {
   padding: 0 32px 36px 32px; 
 }
 
-/* 🎯 Structural Metadata Lines */
 .receipt-body p {
   text-align: center !important; 
   margin: 8px 0 !important;
@@ -470,14 +468,12 @@ button, input, select, textarea {
   line-height: 1.6 !important;
 }
 
-/* Elegant, spacious dashed dividers */
 .receipt-dashes { 
   border: none; 
   border-top: 2px dashed var(--border-slate); 
   margin: 20px 0; 
 }
 
-/* 🎯 Left-Right Balanced Data Grids */
 .receipt-item-row { 
   display: flex; 
   justify-content: space-between; 
@@ -530,7 +526,6 @@ button, input, select, textarea {
   font-size: 16px; 
 }
 
-/* 🎯 Center-aligned Footer Canvas */
 .receipt-footer { 
   text-align: center; 
   font-size: 13px; 
@@ -575,8 +570,8 @@ button, input, select, textarea {
     background: #ffffff !important;
     color: #000000 !important; 
     font-family: "Courier New", Courier, monospace !important; 
-    font-size: 14px !important;
-    line-height: 1.6 !important;
+    font-size: 13px !important;
+    line-height: 1.4 !important;
     width: 80mm;
     height: auto;
   }
@@ -585,75 +580,69 @@ button, input, select, textarea {
     visibility: hidden !important;
   }
 
+  /* Reveal thermal base containers safely */
   .overlay, 
   .overlay * {
     visibility: visible !important;
-    display: block !important;
   }
 
   .overlay {
-    position: absolute !important;
-    position: fixed !important;
-    left: 0 !important; top: 0 !important;
+    position: static !important; /* Static allows height parsing over multi-page thermal sheets */
     width: 80mm !important;
     background: #ffffff !important;
     backdrop-filter: none !important;
-    padding: 0 !important; margin: 0 !important;
+    padding: 0 !important; 
+    margin: 0 !important;
     box-shadow: none !important;
   }
 
   .receipt-modal {
-    width: 74mm !important; 
-    max-width: 74mm !important;
+    width: 76mm !important; 
+    max-width: 76mm !important;
     margin: 0 auto !important;
-    padding: 6mm 2mm 12mm 2mm !important; 
+    padding: 4mm 2mm 8mm 2mm !important; 
     background: #ffffff !important;
     box-shadow: none !important;
     border: none !important;
     border-radius: 0 !important;
     overflow: visible !important;
-    display: flex !important;
-    flex-direction: column !important;
-    float: none !important;
-    align-items: center !important;
+    display: block !important;
   }
 
+  /* Hard-strip UI operational layouts from the printer spooler */
   .receipt-actions, .no-print, .btn-complete-sale, .btn-clear-all {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
   }
 
-  /* Force the entire container element block to center-align data */
-  .printable-receipt-content {
-    width: 100% !important;
-    padding: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    float: none;
-    text-align:center !important;
-  }
-
-  /* Force all nested elements inside the ticket content to snap perfectly to the center axis */
-  .printable-receipt-content div,
-  .printable-receipt-content p,
-  .printable-receipt-content span,
-  .printable-receipt-content strong {
+  /* Base alignment structures */
+  .receipt-header, .receipt-footer, .receipt-body p {
     text-align: center !important;
-    float: none !important;
-    display: block !important;
-    width: 100% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
   }
 
+  /* Structural side-by-side transaction tables preserved */
+  .receipt-item-row, .receipt-sum-row {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  /* Direct text heading container parameters mapping text alignment */
+  .receipt-brand-name, .receipt-meta, .receipt-footer-brand {
+    display: block !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  /* The clean-cut ticket edge-divider rule execution */
   .receipt-dashes {
     display: block !important;
     width: 100% !important;
-    clear: both !important;
     border: none !important;
     border-top: 1px dashed #000000 !important;
-    margin: 12px 0 !important;
+    margin: 10px 0 !important;
   }
 }
