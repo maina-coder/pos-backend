@@ -11,147 +11,107 @@ export default function ReceiptModal({
   const productBasePrice = totalAmount / 1.16;
   const vatAmount = totalAmount - productBasePrice;
 
-  // 🖨️ Perfectly centered monospace divider
-  const TextDivider = () => (
-    <div style={{
-      textAlign: 'center',
-      color: '#cbd5e1',
-      fontFamily: '"Courier New", Courier, monospace',
-      fontSize: '14px',
-      letterSpacing: '3px',
-      margin: '16px 0',
-      width: '100%'
-    }}>
-      ----------------------------------
-    </div>
-  );
-
   return (
-    <div className="overlay" style={{
-      position: 'fixed', inset: 0,
-      backgroundColor: 'rgba(11, 19, 41, 0.7)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      zIndex: 9999, padding: '20px', backdropFilter: 'blur(6px)'
-    }}>
-      <div className="receipt-modal" style={{
-        backgroundColor: '#ffffff', borderRadius: '24px',
-        width: '420px', maxHeight: '90vh', overflowY: 'auto',
-        boxShadow: '0 25px 50px -12px rgba(11, 19, 41, 0.35)',
-        display: 'flex', flexDirection: 'column'
-      }}>
+    <div className="overlay">
+      <div className="receipt-modal">
         
         {/* =========================================================================
            🖨️ PRINTABLE CANVAS AREA (Center-Locked Grid Platform)
            ========================================================================= */}
-        <div className="printable-receipt-content" style={{ 
-          width: '100%', 
-          display: 'flex', 
-          flexDirection: 'column',
-          alignItems: 'center', // 🎯 Forces container child items to center
-          textAlign: 'center',
-          fontFamily: '"Inter", -apple-system, sans-serif',
-          padding: '36px 32px'
-        }}>
+        <div className="printable-receipt-content">
           
           {/* Header */}
-          <div style={{ width: '100%', textAlign: 'center', marginBottom: '16px' }}>
-            <h2 style={{ fontSize: '18px', fontWeight: '800', margin: '0 0 8px 0', color: '#0b1329', lineHeight: '1.4' }}>
+          <div className="receipt-header">
+            <h2 className="receipt-brand-name">
               DEVERONIG DIGITAL ELECTRONICS LTD
             </h2>
-            <p style={{ fontSize: '13px', color: '#475569', margin: '4px 0' }}>Magomano Business Complex, Room 4.1</p>
-            <p style={{ fontSize: '13px', color: '#475569', margin: '4px 0' }}>Tel: 0712 407 941</p>
-            <p style={{ fontSize: '13px', color: '#475569', margin: '4px 0' }}>Email: info@deveronig.co.ke</p>
-            <p style={{ fontSize: '12px', color: '#64748b', margin: '8px 0 0 0', fontWeight: '500' }}>
+            <p className="receipt-meta">Magomano Business Complex, Room 4.1</p>
+            <p className="receipt-meta">Tel: 0712 407 941</p>
+            <p className="receipt-meta">Email: info@deveronig.co.ke</p>
+            <p className="receipt-meta" style={{ fontWeight: '500', marginTop: '8px' }}>
               Date: {receipt.timestamp ? new Date(receipt.timestamp).toLocaleString() : new Date().toLocaleString()}
             </p>
           </div>
 
           {/* Meta Information */}
-          <div style={{ width: '100%', textAlign: 'center' }}>
-            <p style={{ fontSize: '13px', margin: '4px 0', color: '#334155' }}><strong>Receipt ID:</strong> #{receipt.id}</p>
-            <p style={{ fontSize: '13px', margin: '4px 0', color: '#334155' }}><strong>Cashier:</strong> {receipt.cashier_name || "System Operator"}</p>
+          <div className="receipt-header-meta" style={{ textAlign: 'center', width: '100%' }}>
+            <p className="receipt-meta"><strong>Receipt ID:</strong> #{receipt.id}</p>
+            <p className="receipt-meta"><strong>Cashier:</strong> {receipt.cashier_name || "System Operator"}</p>
           </div>
              
-          <TextDivider />
+          <div className="receipt-dashes">----------------------------------</div>
 
-          {/* 🧾 Line Items (Shifted to Center Align blocks instead of Left/Right splits) */}
-          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '14px', textAlign: 'center' }}>
+          {/* 🧾 Line Items (Using flexible class handles instead of strict inline layouts) */}
+          <div className="receipt-items-container" style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '14px' }}>
             {(receipt.items || []).map((item, index) => (
-              <div key={item.id || index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ fontWeight: '700', color: '#0f172a', fontSize: '14px' }}>{item.name}</span>
-                <span style={{ fontSize: '13px', color: '#64748b', marginTop: '2px' }}>
-                  {item.quantity} x {fmt(item.price)} = <strong style={{ color: '#0b1329' }}>{fmt(item.price * item.quantity)}</strong>
+              <div key={item.id || index} className="receipt-item-row">
+                <span className="receipt-item-name">{item.name}</span>
+                <span className="receipt-item-detail">
+                  {item.quantity} x {fmt(item.price)} = <strong style={{ color: 'inherit' }}>{fmt(item.price * item.quantity)}</strong>
                 </span>
               </div>
             ))}
           </div>
 
-          <TextDivider />
+          <div className="receipt-dashes">----------------------------------</div>
 
-          {/* 💵 Financial Totals Panel (Center-Aligned stacked metrics) */}
-          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center', textAlign: 'center' }}>
-            <div style={{ fontSize: '13px', color: '#475569' }}>
-              Net Price: <strong style={{ color: '#0f172a' }}>{fmt(productBasePrice)}</strong>
+          {/* 💵 Financial Totals Panel */}
+          <div className="receipt-totals-container" style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div className="receipt-sum-row">
+              <span>Net Price:</span>
+              <strong>{fmt(productBasePrice)}</strong>
             </div>
-            <div style={{ fontSize: '13px', color: '#475569' }}>
-              VAT (16% Included): <strong style={{ color: '#0f172a' }}>{fmt(vatAmount)}</strong>
+            <div className="receipt-sum-row">
+              <span>VAT (16% Included):</span>
+              <strong>{fmt(vatAmount)}</strong>
             </div>
             
-            <div style={{ 
-              width: '100%',
-              textAlign: 'center',
-              paddingTop: '12px', 
-              marginTop: '8px',
-              borderTop: '2px dashed #0b1329'
-            }}>
+            <div className="receipt-sum-row--total">
               <div style={{ fontSize: '13px', fontWeight: '700', color: '#64748b' }}>GRAND TOTAL</div>
-              <div style={{ fontSize: '26px', fontWeight: '800', color: '#0b1329', marginTop: '2px' }}>{fmt(totalAmount)}</div>
+              <div style={{ fontSize: '26px', fontWeight: '800', marginTop: '2px' }}>{fmt(totalAmount)}</div>
             </div>
           </div>
 
-          {/* 🎯 Paybill Info Box (Perfect Center Layout Block) */}
-          <div style={{ 
+          {/* 🎯 Paybill Info Box */}
+          <div className="receipt-paybill-box" style={{ 
             width: '100%',
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center',
-            gap: '6px',
             marginTop: '16px', 
             padding: '14px', 
             background: '#f8fafc', 
             borderRadius: '12px', 
-            border: '1px solid #e2e8f0',
-            textAlign: 'center'
+            border: '1px solid #e2e8f0'
           }}>
-            <div>
-              <span style={{ fontSize: '12px', fontWeight: '700', color: '#64748b' }}>PAYMENT TYPE: </span>
+            <div className="receipt-paybill-type">
+              <span>PAYMENT TYPE: </span>
               <strong style={{ color: receipt.payment_mode === "M-PESA" ? "#10b981" : "#0b1329", fontWeight: '800' }}>
                 {receipt.payment_mode || "CASH"}
               </strong>
             </div>
-            <div style={{ width: '100%', borderTop: '1px dashed #e2e8f0', marginTop: '6px', paddingTop: '6px', fontSize: '13px', color: '#475569' }}>
-              <p style={{ margin: '3px 0' }}>Lipa Na M-PESA Paybill: <strong>542542</strong></p>
-              <p style={{ margin: '3px 0' }}>Account Number: <strong>124079</strong></p>
+            <div className="receipt-paybill-details" style={{ width: '100%', borderTop: '1px dashed #e2e8f0', marginTop: '6px', paddingTop: '6px' }}>
+              <p className="receipt-meta">Lipa Na M-PESA Paybill: <strong>542542</strong></p>
+              <p className="receipt-meta">Account Number: <strong>124079</strong></p>
             </div>
           </div>
 
           {/* Cash Ledger Status Summary */}
-          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', marginTop: '16px', textAlign: 'center' }}>
-            <div style={{ fontSize: '13px', color: '#475569' }}>
-              Amount Received: <span style={{ fontWeight: '600', color: '#0f172a' }}>{fmt(receipt.amount_received)}</span>
+          <div className="receipt-ledger-summary" style={{ width: '100%', marginTop: '16px' }}>
+            <div className="receipt-sum-row">
+              <span>Amount Received:</span>
+              <span>{fmt(receipt.amount_received)}</span>
             </div>
-            <div style={{ fontSize: '14px', fontWeight: '700', color: '#10b981' }}>
-              CHANGE DUE: <span>{fmt(receipt.balance)}</span>
+            <div className="receipt-sum-row receipt-sum-row--change">
+              <span>CHANGE DUE:</span>
+              <span>{fmt(receipt.balance)}</span>
             </div>
           </div>
 
-          <TextDivider />
+          <div className="receipt-dashes">----------------------------------</div>
 
           {/* Footer Canvas */}
-          <div style={{ width: '100%', textAlign: 'center', fontSize: '13px', color: '#64748b', lineHeight: '1.5' }}>
-            <p style={{ margin: '4px 0' }}>Thank you for purchasing from us!</p>
-            <p style={{ margin: '4px 0', fontWeight: '500' }}>Goods once sold are not returnable.</p>
-            <h4 style={{ fontSize: '13px', fontWeight: '700', color: '#0b1329', marginTop: '12px' }}>Powered by Deveronig POS</h4>
+          <div className="receipt-footer">
+            <p>Thank you for purchasing from us!</p>
+            <p style={{ fontWeight: '500' }}>Goods once sold are not returnable.</p>
+            <h4 className="receipt-footer-brand">Powered by Deveronig POS</h4>
           </div>
 
         </div>
