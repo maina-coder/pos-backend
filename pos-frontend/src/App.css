@@ -11,8 +11,8 @@
 /* =============================================================================
    1. VARIABLES, FONTS, AND DESIGN ENGINE RESET
 ============================================================================= */
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght=500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700&display=swap');
 
 :root {
   --navy-dark:      #0b1329;  /* Deep tech canvas backdrop */
@@ -324,7 +324,6 @@ button, input, select, textarea {
 .items-table-wrapper { overflow-y: auto; flex: 1; padding: 0; }
 .items-table { width: 100%; border-collapse: collapse; }
 
-/* 🎯 FIXED LINE 197: Swapped 'Harriet' back to standard 'thead' mapping */
 .items-table thead th {
   background: #f8fafc;
   color: var(--text-muted);
@@ -440,6 +439,7 @@ button, input, select, textarea {
   color: var(--navy-dark); 
   padding: 36px 32px 20px 32px; 
   text-align: center; 
+  color:#000000;  
 }
 
 .receipt-brand-name { 
@@ -449,6 +449,7 @@ button, input, select, textarea {
   letter-spacing: 0.5px; 
   margin-bottom: 10px;
   line-height: 1.4;
+  color:#000000;  
 }
 
 .receipt-meta { 
@@ -467,6 +468,7 @@ button, input, select, textarea {
   margin: 8px 0 !important;
   font-size: 14px !important;
   line-height: 1.6 !important;
+  color:#000000;  
 }
 
 .receipt-dashes { 
@@ -492,7 +494,7 @@ button, input, select, textarea {
 
 .receipt-item-detail { 
   font-size: 13px; 
-  color: #64748b; 
+  color:#000000;   
   margin-top: 2px;
   font-weight: 400;
 }
@@ -508,7 +510,7 @@ button, input, select, textarea {
   justify-content: space-between; 
   padding: 6px 0; 
   font-size: 14px; 
-  color: var(--text-muted);
+  color:#000000;  
 }
 
 .receipt-sum-row--total { 
@@ -519,18 +521,21 @@ button, input, select, textarea {
   border-top: 2px dashed var(--navy-dark); 
   padding-top: 16px; 
   margin-top: 12px; 
+  color:#000000;  
 }
 
 .receipt-sum-row--change { 
-  color: var(--success-green); 
-  font-weight: 700; 
+  color:#000000;  
+  font-weight: 900; 
   font-size: 16px; 
 }
+
+.receipt-box-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; opacity: 0.8; margin-bottom: 4px; }
 
 .receipt-footer { 
   text-align: center; 
   font-size: 13px; 
-  color: #64748b; 
+  color: #000000; 
   margin-top: 12px; 
   line-height: 1.6;
 }
@@ -543,7 +548,7 @@ button, input, select, textarea {
 .receipt-footer-brand { 
   font-family: 'Inter', sans-serif; 
   font-size: 14px; 
-  font-weight: 700; 
+  font-weight: 900; 
   color: var(--navy-dark); 
   margin-top: 16px; 
   letter-spacing: 0.3px;
@@ -567,24 +572,31 @@ button, input, select, textarea {
     margin: 0mm;
   }
 
+  /* 1. Reset standard canvas rules to raw high contrast monochrome */
   html, body {
     background: #ffffff !important;
     color: #000000 !important; 
     font-family: "Courier New", Courier, monospace !important; 
-    font-size: 12px !important; 
-    line-height: 1.1 !important; 
+    font-size: 13px !important; 
+    line-height: 1.2 !important; 
     width: 80mm;
     height: auto !important;
+    font-weight: 700 !important;
+    -webkit-font-smoothing: none !important;
+    -moz-osx-font-smoothing: none !important;
+    text-rendering: optimizeSpeed !important;
   }
 
+  /* Hide background interface layouts safely */
   body * {
     visibility: hidden !important;
   }
 
+  /* 2. Target specific printable elements to maintain clean context structures */
   .overlay, 
   .overlay * {
     visibility: visible !important;
-    display: block !important;
+    color: #000000 !important;
   }
 
   .overlay {
@@ -598,10 +610,10 @@ button, input, select, textarea {
   }
 
   .receipt-modal {
-    width: 74mm !important; 
-    max-width: 74mm !important;
+    width: 76mm !important; 
+    max-width: 76mm !important;
     margin: 0 auto !important;
-    padding: 1mm !important; 
+    padding: 2mm !important; 
     background: #ffffff !important;
     box-shadow: none !important;
     border: none !important;
@@ -609,9 +621,9 @@ button, input, select, textarea {
     overflow: visible !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
   }
 
+  /* Completely clear out desktop-only operation interfaces */
   .receipt-actions, .no-print, .btn-complete-sale, .btn-clear-all {
     display: none !important;
     visibility: hidden !important;
@@ -621,32 +633,45 @@ button, input, select, textarea {
   .printable-receipt-content {
     width: 100% !important;
     padding: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
   }
 
-  .printable-receipt-content div,
+  /* 3. Handle structure alignments cleanly without crushing structural layouts */
   .printable-receipt-content p,
   .printable-receipt-content span,
-  .printable-receipt-content strong,
-  .printable-receipt-content h2,
-  .printable-receipt-content h4 {
-    text-align: center !important;
-    float: none !important;
-    display: block !important;
-    width: 100% !important;
-    margin: 2px auto !important; 
-    padding: 0 !important;
+  .receipt-meta,
+  .receipt-footer {
+    color: #000000 !important;
+    font-weight: 700 !important;
   }
 
+  .receipt-header, .receipt-footer {
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  /* 4. Crucial: Secure structural display grids for accurate data alignment tracking */
+  .receipt-item-row, .receipt-sum-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    clear: both !important;
+  }
+
+  /* 5. Force thick structural stroke rendering for extreme headers */
+  .receipt-brand-name,
+  .receipt-sum-row--total,
+  .receipt-sum-row--total * {
+    font-weight: 900 !important;
+    font-size: 18px !important;
+  }
+
+  /* High contrast tracking breaks */
   .receipt-dashes {
     display: block !important;
     width: 100% !important;
-    clear: both !important;
     border: none !important;
-    border-top: 1px dashed #000000 !important;
-    margin: 4px 0 !important; 
+    border-top: 2px dashed #000000 !important;
+    margin: 6px 0 !important;
   }
 }

@@ -16,7 +16,7 @@ export default function ReceiptModal({
       <div className="receipt-modal">
         
         {/* =========================================================================
-           🖨️ PRINTABLE CANVAS AREA
+            🖨️ PRINTABLE CANVAS AREA
            ========================================================================= */}
         <div className="printable-receipt-content">
           
@@ -28,7 +28,7 @@ export default function ReceiptModal({
             <p className="receipt-meta">Magomano Business Complex, Room 4.1</p>
             <p className="receipt-meta">Tel: 0712 407 941</p>
             <p className="receipt-meta">Email: info@deveronig.co.ke</p>
-            <p className="receipt-meta" style={{ fontWeight: '500', marginTop: '4px' }}>
+            <p className="receipt-meta" style={{ fontWeight: '700', marginTop: '4px' }}>
               Date: {receipt.timestamp ? new Date(receipt.timestamp).toLocaleString() : new Date().toLocaleString()}
             </p>
           </div>
@@ -38,15 +38,15 @@ export default function ReceiptModal({
             <p className="receipt-meta"><strong>Receipt ID:</strong> #{receipt.id}</p>
             <p className="receipt-meta"><strong>Cashier:</strong> {receipt.cashier_name || "System Operator"}</p>
           </div>
-             
+               
           <div className="receipt-dashes">----------------------------------</div>
 
           {/* 🧾 Line Items */}
           <div className="receipt-items-container" style={{ width: '100%' }}>
             {(receipt.items || []).map((item, index) => (
               <div key={item.id || index} className="receipt-item-row" style={{ marginBottom: '10px' }}>
-                <div className="receipt-item-name" style={{ fontWeight: '700', color: '#0f172a' }}>{item.name}</div>
-                <div className="receipt-item-detail" style={{ color: '#475569', marginTop: '2px' }}>
+                <div className="receipt-item-name" style={{ fontWeight: '700' }}>{item.name}</div>
+                <div className="receipt-item-detail" style={{ marginTop: '2px', fontWeight: '500' }}>
                   {item.quantity} x {fmt(item.price)} = {fmt(item.price * item.quantity)}
                 </div>
               </div>
@@ -64,9 +64,9 @@ export default function ReceiptModal({
               VAT (16% Included): <strong>{fmt(vatAmount)}</strong>
             </div>
             
-            <div className="receipt-sum-row--total" style={{ width: '100%', textAlign: 'center', marginTop: '8px', paddingTop: '8px', borderTop: '1px dashed #0b1329' }}>
-              <div style={{ fontSize: '12px', fontWeight: '700', color: '#64748b' }}>GRAND TOTAL</div>
-              <div style={{ fontSize: '24px', fontWeight: '800', color: '#0b1329', marginTop: '2px' }}>{fmt(totalAmount)}</div>
+            <div className="receipt-sum-row--total" style={{ width: '100%', textAlign: 'center', marginTop: '8px', paddingTop: '8px' }}>
+              <div style={{ fontSize: '12px', fontWeight: '800' }}>GRAND TOTAL</div>
+              <div style={{ fontSize: '24px', fontWeight: '900', marginTop: '2px' }}>{fmt(totalAmount)}</div>
             </div>
           </div>
 
@@ -75,17 +75,16 @@ export default function ReceiptModal({
             width: '100%',
             marginTop: '14px', 
             padding: '12px', 
-            background: '#f8fafc', 
             borderRadius: '12px', 
-            border: '1px solid #e2e8f0'
+            border: '1px dashed #000000'
           }}>
             <div className="receipt-paybill-type" style={{ fontSize: '13px' }}>
               <span>PAYMENT TYPE: </span>
-              <strong style={{ color: receipt.payment_mode === "M-PESA" ? "#10b981" : "#0b1329", fontWeight: '800' }}>
+              <strong style={{ fontWeight: '900' }}>
                 {receipt.payment_mode || "CASH"}
               </strong>
             </div>
-            <div className="receipt-paybill-details" style={{ width: '100%', borderTop: '1px dashed #e2e8f0', marginTop: '6px', paddingTop: '6px' }}>
+            <div className="receipt-paybill-details" style={{ width: '100%', borderTop: '1px dashed #000000', marginTop: '6px', paddingTop: '6px' }}>
               <p className="receipt-meta">Lipa Na M-PESA Paybill: <strong>542542</strong></p>
               <p className="receipt-meta">Account Number: <strong>124079</strong></p>
             </div>
@@ -96,7 +95,7 @@ export default function ReceiptModal({
             <div className="receipt-sum-row">
               Amount Received: {fmt(receipt.amount_received)}
             </div>
-            <div className="receipt-sum-row receipt-sum-row--change" style={{ color: '#10b981', fontWeight: '700', fontSize: '15px' }}>
+            <div className="receipt-sum-row receipt-sum-row--change" style={{ fontWeight: '900', fontSize: '15px' }}>
               CHANGE DUE: {fmt(receipt.balance)}
             </div>
           </div>
@@ -106,14 +105,14 @@ export default function ReceiptModal({
           {/* Footer Canvas */}
           <div className="receipt-footer">
             <p>Thank you for purchasing from us!</p>
-            <p style={{ fontWeight: '500' }}>Goods once sold are not returnable.</p>
-            <h4 className="receipt-footer-brand" style={{ marginTop: '8px' }}>Powered by Deveronig POS</h4>
+            <p style={{ fontWeight: '700' }}>Goods once sold are not returnable.</p>
+            <h4 className="receipt-footer-brand" style={{ marginTop: '8px', fontWeight: '900' }}>Powered by Deveronig POS</h4>
           </div>
 
         </div>
 
         {/* =========================================================================
-           🖥️ ACTIONS CONTROL PANEL (Screen Interface Only)
+            🖥️ ACTIONS CONTROL PANEL (Screen Interface Only)
            ========================================================================= */}
         <div className="receipt-actions no-print" style={{ background: '#f8fafc', padding: '16px 24px 24px', display: 'flex', flexDirection: 'column', gap: '12px', borderTop: '1px solid #e2e8f0', borderRadius: '0 0 24px 24px' }}>
           <button 
