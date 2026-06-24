@@ -572,13 +572,13 @@ button, input, select, textarea {
     margin: 0mm;
   }
 
-  /* 1. Reset standard canvas rules to raw high contrast monochrome */
+  /* 1. Ultra-tight context layout engine reset */
   html, body {
     background: #ffffff !important;
     color: #000000 !important; 
     font-family: "Courier New", Courier, monospace !important; 
     font-size: 13px !important; 
-    line-height: 1.2 !important; 
+    line-height: 1.0 !important; /* Completely blocks vertical stretching */
     width: 80mm;
     height: auto !important;
     font-weight: 700 !important;
@@ -587,12 +587,12 @@ button, input, select, textarea {
     text-rendering: optimizeSpeed !important;
   }
 
-  /* Hide background interface layouts safely */
+  /* Hide peripheral app infrastructure */
   body * {
     visibility: hidden !important;
   }
 
-  /* 2. Target specific printable elements to maintain clean context structures */
+  /* 2. Target specific printable canvas view frames */
   .overlay, 
   .overlay * {
     visibility: visible !important;
@@ -613,7 +613,7 @@ button, input, select, textarea {
     width: 76mm !important; 
     max-width: 76mm !important;
     margin: 0 auto !important;
-    padding: 2mm !important; 
+    padding: 1mm !important; 
     background: #ffffff !important;
     box-shadow: none !important;
     border: none !important;
@@ -623,7 +623,7 @@ button, input, select, textarea {
     flex-direction: column !important;
   }
 
-  /* Completely clear out desktop-only operation interfaces */
+  /* Strip UI command blocks */
   .receipt-actions, .no-print, .btn-complete-sale, .btn-clear-all {
     display: none !important;
     visibility: hidden !important;
@@ -635,13 +635,15 @@ button, input, select, textarea {
     padding: 0 !important;
   }
 
-  /* 3. Handle structure alignments cleanly without crushing structural layouts */
+  /* 3. Drop all browser-default margins and line padding to save paper */
   .printable-receipt-content p,
   .printable-receipt-content span,
   .receipt-meta,
-  .receipt-footer {
+  .receipt-footer p {
     color: #000000 !important;
     font-weight: 700 !important;
+    margin: 1px 0 !important; /* Drops line separation to absolute minimum */
+    padding: 0 !important;
   }
 
   .receipt-header, .receipt-footer {
@@ -649,29 +651,66 @@ button, input, select, textarea {
     width: 100% !important;
   }
 
-  /* 4. Crucial: Secure structural display grids for accurate data alignment tracking */
-  .receipt-item-row, .receipt-sum-row {
+  /* 4. Compact row layout bindings */
+  .receipt-item-row {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
     width: 100% !important;
     clear: both !important;
+    margin-bottom: 2px !important; /* Compresses item item lines */
+    padding: 0 !important;
   }
 
-  /* 5. Force thick structural stroke rendering for extreme headers */
-  .receipt-brand-name,
-  .receipt-sum-row--total,
-  .receipt-sum-row--total * {
+  .receipt-sum-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    clear: both !important;
+    margin: 2px 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 5. Tighten bottom totals structures */
+  .receipt-sum-row--total {
     font-weight: 900 !important;
     font-size: 18px !important;
+    margin-top: 4px !important;
+    padding-top: 4px !important;
   }
 
-  /* High contrast tracking breaks */
+  .receipt-paybill-box {
+    margin-top: 4px !important;
+    padding: 4px !important;
+    border: 1px dashed #000000 !important;
+    background: transparent !important;
+    width: 100% !important;
+  }
+
+  .receipt-paybill-details {
+    margin-top: 2px !important;
+    padding-top: 2px !important;
+    border-top: 1px dashed #000000 !important;
+  }
+
+  .receipt-ledger-summary {
+    margin-top: 4px !important;
+    width: 100% !important;
+  }
+
+  .receipt-brand-name {
+    font-weight: 900 !important;
+    font-size: 16px !important;
+    margin-bottom: 2px !important;
+  }
+
+  /* 6. Tighten structural dashed borders */
   .receipt-dashes {
     display: block !important;
     width: 100% !important;
     border: none !important;
     border-top: 2px dashed #000000 !important;
-    margin: 6px 0 !important;
+    margin: 3px 0 !important;
   }
 }
